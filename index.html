@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <title>print</title>
+    <link rel="stylesheet" href="./index.css">
+</head>
+<body>
+<h1 id="titleView"></h1>
+
+<fieldset>
+    <legend>Interface</legend>
+    <section>
+        <span>Base URL:</span>
+        <code>http://127.0.0.1:9697/print</code>
+        <span>OR</span>
+        <code>https://127.0.0.1:9697/print</code>
+    </section>
+    <ul>
+        <li>
+            <dl>
+                <dt>/printer</dt>
+                <dd>GET</dd>
+            </dl>
+        </li>
+        <li>
+            <dl>
+                <dt>/silentPrint</dt>
+                <dd>POST: params</dd>
+                <dd>
+                    <code>
+                        {
+                        "type": "html",
+                        "content": "&lt;h1&gt;hello&lt;/h1&gt;",
+                        "deviceName": "Microsoft Print to PDF",
+                        "pcs": "1",
+                        "marginTop": "0px",
+                        "marginLeft": "2cm"
+                        }
+                    </code>
+                    <p>OR</p>
+                    <code>
+                        {
+                        "type": "pdf",
+                        "content":
+                        "https://boyi-consultation-image.oss-cn-beijing.aliyuncs.com/PDF/2021/03/05/553927384185835520/564876316831256576.pdf",
+                        "deviceName": "Microsoft Print to PDF",
+                        "pcs": "1"
+                        }
+                    </code>
+                </dd>
+            </dl>
+        </li>
+    </ul>
+</fieldset>
+<fieldset>
+    <legend>Update Info</legend>
+    <section>
+        <span>Update URL: </span>
+        <span id="updateView"></span>
+    </section>
+    <section>
+        <div class="progress">
+            <div class="bar"></div>
+        </div>
+    </section>
+    <section>
+        <span>Update Message: </span>
+        <ul id="messageView"></ul>
+    </section>
+</fieldset>
+
+<script src="./renderer.js"></script>
+</body>
+</html>

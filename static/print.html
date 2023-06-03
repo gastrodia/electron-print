@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+    <style>
+        html {
+            font-family: "Microsoft YaHei";
+        }
+    </style>
+</head>
+
+<body></body>
+<script>
+    //引入ipcRenderer对象
+    const {ipcRenderer} = require('electron')
+    ipcRenderer.on('htmlPrint', (e, {content, margin}) => { //接收响应
+        const {left, top} = margin
+        const style = document.createElement('style')
+        const css = document.createTextNode(`
+        @page {
+            margin: 0;
+            margin-left: ${left};
+            margin-top: ${top};
+        }`)
+        style.appendChild(css)
+        document.head.appendChild(style)
+        document.body.innerHTML = content
+        ipcRenderer.send('htmlPrinting') //向webview所在页面的进程传达消息
+    })
+</script>
+
+</html>
